@@ -14,18 +14,43 @@ UINavigationControllerDelegate {
 	
 	
 	@IBOutlet weak var imagePicker: UIImageView!
+	@IBOutlet weak var topTextField: UITextField!
+	@IBOutlet weak var bottomTextField: UITextField!
+	
+	
+	//let imagePicker = UIImagePickerController()
+	
+
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-	
+		
+		func textFieldsSetup(textFields: [UITextField?])
+		{
+			let defaultString : String = "GET CREATIVE"
+			
+			let memeTextAttributes:[String:Any] = [
+				//Outline Colour
+				NSStrokeColorAttributeName: UIColor.black,
+				//Text Colour
+				NSForegroundColorAttributeName : UIColor.white,
+				NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 60)!,
+				NSStrokeWidthAttributeName : -4.0
+				] as [String : Any]
+			for textField in textFields
+			{
+				textField?.defaultTextAttributes = memeTextAttributes
+				textField?.textAlignment = .center
+	//			textField?.delegate = self
+			}
+		}
 
-		// Do any additional setup after loading the view, typically from a nib.
-	}
 	override func viewWillAppear(_ animated: Bool) {
 		//cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
 		super.viewWillAppear(animated)
 		subscribeToKeyboardNotifications()
 	}
+	
 	
 	override func viewWillDisappear(_ animated: Bool) {
 		
@@ -68,22 +93,11 @@ UINavigationControllerDelegate {
 		imagePicker.delegate = self
 		imagePicker.sourceType = .photoLibrary
 		present(imagePicker, animated: true, completion: nil)
-		//dismiss(animated: true, completion: nil)
+		
 	}
 
-	@IBAction func pickAnImage(_ sender: Any) {
-		// cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
-		
-
-		let imagePicker = UIImagePickerController()
-		imagePicker.delegate = self
-		present(imagePicker, animated: true, completion: nil)
-	//	dismiss(animated: true, completion: nil)
-
-	}
-	@objc(imagePickerControllerDidCancel:) func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-		
-		self.dismiss(animated: true, completion: nil)
+	func imagePickerControllerDidCancel(_: UIImagePickerController) {
+		dismiss(animated: true, completion: nil)
 	}
 
 }
