@@ -5,7 +5,6 @@
 //  Created by Martina Klimova on 11/05/2017.
 //  Copyright © 2017 Martina Klimova. All rights reserved.
 //
-
 import UIKit
 
 
@@ -13,22 +12,22 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate,UITextFieldDelegate {
 	
 	
-	@IBOutlet weak var imagePicker: UIImageView!
+	@IBOutlet weak var imagePickerView: UIImageView!
 	@IBOutlet weak var topTextField: UITextField!
 	@IBOutlet weak var bottomTextField: UITextField!
-	 @IBOutlet weak var cameraButton: UIBarButtonItem!
+	@IBOutlet weak var cameraButton: UIBarButtonItem!
+	@IBOutlet weak var albumButton: UIBarButtonItem!
 	
-	
-	//let imagePicker = UIImagePickerController()
-	
+	@IBOutlet weak var shareToolbar: UIToolbar!
+	@IBOutlet weak var pickToolbar: UIToolbar!
 
-	
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		let textField = [topTextField,bottomTextField]
 		func textFieldsSetup(textFields: [UITextField?])
 		{
-			let defaultString : String = "GET CREATIVE"
+			// let defaultString : String = "GET CREATIVE"
 			
 			let memeTextAttributes:[String:Any] = [
 				//Outline Colour
@@ -42,11 +41,11 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 			{
 				textField?.defaultTextAttributes = memeTextAttributes
 				textField?.textAlignment = .center
-	//			textField?.delegate = self
+				//			textField?.delegate = self
 			}
 		}
 	}
-
+	
 	func cameraCheck()
 	{
 		cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
@@ -86,26 +85,28 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 		
 		NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
 	}
-	@IBAction func pickAnImageFromCamera(_ sender: Any) {
+	
+	func pickAnImageFromSource(source: UIImagePickerControllerSourceType) {
+		let pickerImage = UIImagePickerController()
 		
-		let imagePicker = UIImagePickerController()
-		imagePicker.delegate = self
-		present(imagePicker, animated: true, completion: nil)
-		dismiss(animated: true, completion: nil)
+		pickerImage.delegate = self
+		pickerImage.sourceType = source
+		present(pickerImage, animated: true, completion: nil)
 	}
 	
-	@IBAction func pickAnImageFromAlbum(_ sender: Any) {
-		
-		let imagePicker = UIImagePickerController()
-		imagePicker.delegate = self
-		imagePicker.sourceType = .photoLibrary
-		present(imagePicker, animated: true, completion: nil)
-		
+	@IBAction func cameraButtonAction(_ sender: Any) {
+		pickAnImageFromSource(source: .camera)
 	}
-
+	@IBAction func photoAlbumAction(_ sender: Any) {
+		pickAnImageFromSource(source: .photoLibrary)
+	}
+	
+	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+		imagePickerView.image = info[UIImagePickerControllerOriginalImage] as? UIImage; dismiss(animated: true, completion: nil)
+	}
+	
 	func imagePickerControllerDidCancel(_: UIImagePickerController) {
 		dismiss(animated: true, completion: nil)
 	}
-
+	
 }
-
