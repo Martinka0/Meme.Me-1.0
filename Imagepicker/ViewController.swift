@@ -11,14 +11,16 @@ import UIKit
 class ViewController: UIViewController, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate,UITextFieldDelegate {
 	
+	@IBOutlet weak var navigationBar: UINavigationBar!
 	
+	@IBOutlet weak var CancelButton: UIBarButtonItem!
+	@IBOutlet weak var shareButton: UIBarButtonItem!
 	@IBOutlet weak var imagePickerView: UIImageView!
 	@IBOutlet weak var topTextField: UITextField!
 	@IBOutlet weak var bottomTextField: UITextField!
 	@IBOutlet weak var cameraButton: UIBarButtonItem!
 	@IBOutlet weak var albumButton: UIBarButtonItem!
-	
-	@IBOutlet weak var shareToolbar: UIToolbar!
+
 	@IBOutlet weak var pickToolbar: UIToolbar!
 
 
@@ -88,7 +90,6 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 	
 	func pickAnImageFromSource(source: UIImagePickerControllerSourceType) {
 		let pickerImage = UIImagePickerController()
-		
 		pickerImage.delegate = self
 		pickerImage.sourceType = source
 		present(pickerImage, animated: true, completion: nil)
