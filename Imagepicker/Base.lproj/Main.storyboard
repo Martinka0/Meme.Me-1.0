@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -43,49 +44,54 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Paf-6p-Pkm">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <items>
-                                    <navigationItem title="MemeMe" id="Ik4-4n-yuT">
+                                    <navigationItem id="Ik4-4n-yuT">
                                         <barButtonItem key="leftBarButtonItem" systemItem="action" id="vRi-iu-swo">
                                             <connections>
-                                                <action selector="shareButtonAction:" destination="BYZ-38-t0r" id="mUR-TC-OYZ"/>
+                                                <action selector="shareButtonAction:" destination="BYZ-38-t0r" id="xvS-gx-t60"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="eA2-KV-zWq">
                                             <connections>
-                                                <action selector="cancelButtonAction:" destination="BYZ-38-t0r" id="Kcc-a2-qc3"/>
+                                                <action selector="cancelAction:" destination="BYZ-38-t0r" id="gr9-l6-4LU"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Txa-DT-PY0">
-                                <rect key="frame" x="148" y="81" width="25" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dLN-hm-aUN">
-                                <rect key="frame" x="148" y="382" width="25" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
-                            </textField>
+                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="9xV-xx-OXu">
+                                <rect key="frame" x="56" y="74" width="208" height="332"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="35" translatesAutoresizingMaskIntoConstraints="NO" id="Txa-DT-PY0">
+                                        <rect key="frame" x="0.0" y="0.0" width="208" height="17"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" textAlignment="natural" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="35" translatesAutoresizingMaskIntoConstraints="NO" id="dLN-hm-aUN">
+                                        <rect key="frame" x="0.0" y="315" width="208" height="17"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="dLN-hm-aUN" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="157" id="9X7-nl-f9Y"/>
+                            <constraint firstItem="9xV-xx-OXu" firstAttribute="top" secondItem="Paf-6p-Pkm" secondAttribute="bottom" constant="30" id="11F-Dt-SDS"/>
+                            <constraint firstItem="kL4-ca-67n" firstAttribute="top" secondItem="9xV-xx-OXu" secondAttribute="bottom" constant="30" id="BEZ-98-apE"/>
                             <constraint firstAttribute="trailing" secondItem="Paf-6p-Pkm" secondAttribute="trailing" symbolic="YES" id="Cat-yi-rK0"/>
-                            <constraint firstItem="Txa-DT-PY0" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-144" id="GMg-bo-hFx"/>
                             <constraint firstItem="Paf-6p-Pkm" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" symbolic="YES" id="Grs-Cs-FbD"/>
                             <constraint firstItem="kL4-ca-67n" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" symbolic="YES" id="Hhv-lV-nS2"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="kL4-ca-67n" secondAttribute="bottom" symbolic="YES" id="Qxw-C3-xVR"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9xV-xx-OXu" secondAttribute="trailing" constant="40" id="ZD8-dX-S9f"/>
                             <constraint firstAttribute="trailing" secondItem="kL4-ca-67n" secondAttribute="trailing" symbolic="YES" id="eGy-lx-G7s"/>
-                            <constraint firstItem="dLN-hm-aUN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gwU-4W-jmV"/>
                             <constraint firstItem="kL4-ca-67n" firstAttribute="top" secondItem="tYR-VJ-ezP" secondAttribute="bottom" symbolic="YES" id="oDi-BD-2Fz"/>
                             <constraint firstItem="tYR-VJ-ezP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" symbolic="YES" id="pZp-bT-DLB"/>
                             <constraint firstItem="tYR-VJ-ezP" firstAttribute="top" secondItem="Paf-6p-Pkm" secondAttribute="bottom" id="rMn-3d-wui"/>
                             <constraint firstAttribute="trailing" secondItem="tYR-VJ-ezP" secondAttribute="trailing" constant="20" symbolic="YES" id="tii-IG-2ka"/>
                             <constraint firstItem="Paf-6p-Pkm" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" symbolic="YES" id="u26-MG-F5U"/>
-                            <constraint firstItem="Txa-DT-PY0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="wQo-Vx-mJF"/>
+                            <constraint firstItem="9xV-xx-OXu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="40" id="vVb-5T-4YM"/>
                         </constraints>
                     </view>
                     <connections>

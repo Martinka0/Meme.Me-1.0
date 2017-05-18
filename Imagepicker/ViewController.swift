@@ -33,31 +33,28 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		let textField = [topTextField,bottomTextField]
-		func textFieldsSetup(textFields: [UITextField?])
-		{
-			 //let defaultString : String = "GET CREATIVE"
-			
-			let memeTextAttributes:[String:Any] = [
-				//Outline Colour
-				NSStrokeColorAttributeName: UIColor.black,
-				//Text Colour
-				NSForegroundColorAttributeName : UIColor.white,
-				NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 60)!,
-				NSStrokeWidthAttributeName : -4.0
-				] as [String : Any]
-			for textField in textFields
-			{
-				topTextField.text = "GET"
-				bottomTextField.text = "CREATIVE"
-				textField?.defaultTextAttributes = memeTextAttributes
-				textField?.textAlignment = .center
-				textField?.delegate = self
-			
-			}
+	
+		
+		func textFieldsSetup(textField: UITextField) {
+		textField.defaultTextAttributes = memeTextAttributes
+		topTextField.text = "GET"
+		bottomTextField.text = "CREATIVE"
+		textField.textAlignment = .center
+		textField.delegate = self
 		}
+		textFieldsSetup(textField: topTextField)
+		textFieldsSetup(textField: bottomTextField)
+
 	}
 	
+	let memeTextAttributes:[String:Any] = [
+		//Outline Colour
+		NSStrokeColorAttributeName: UIColor.black,
+		//Text Colour
+		NSForegroundColorAttributeName : UIColor.white,
+		NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 25)!,
+		NSStrokeWidthAttributeName : -4.0
+		] as [String : Any]
 	
 	func pickAnImageFromSource(source: UIImagePickerControllerSourceType) {
 		let pickerImage = UIImagePickerController()
@@ -120,9 +117,7 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 	}
 	
 	func generateMemedImage() -> UIImage {
-		
-		
-		// Render View To An Image
+	
 		UIGraphicsBeginImageContext(self.view.frame.size)
 		view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
 		let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
@@ -134,12 +129,29 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 	
 
 	func save() {
-		// Create The Meme
+		
 		let memedImage = generateMemedImage()
 		_ = Meme(top: topTextField.text!, bottom: bottomTextField.text!, image: imagePickerView.image, memedImage:memedImage)
 		
 	}
 
-
+	@IBAction func shareButtonAction(_ sender: Any) {
+		let memedImage = generateMemedImage()
+		let activityController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
+		activityController.completionWithItemsHandler = { activity, success, items, error in
+			self.save()
+			self.dismiss(animated: true, completion: nil)
+		}
+		
+		present(activityController, animated: true, completion: nil)
+		
+	}
+	
+	@IBAction func cancelAction(_ sender: Any) {
+	
+		topTextField.text = "GET"
+		bottomTextField.text = "CREATIVE"
+		self.imagePickerView.image = nil
+	}
 	
 }
