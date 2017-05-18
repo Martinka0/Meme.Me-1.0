@@ -7,6 +7,14 @@
 //
 import UIKit
 
+var memes = [Meme]()
+
+struct Meme {
+	var top: String = ""
+	var bottom: String = ""
+	var image: UIImage?
+	var memedImage: UIImage?
+}
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate,UITextFieldDelegate {
@@ -20,7 +28,6 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 	@IBOutlet weak var bottomTextField: UITextField!
 	@IBOutlet weak var cameraButton: UIBarButtonItem!
 	@IBOutlet weak var albumButton: UIBarButtonItem!
-
 	@IBOutlet weak var pickToolbar: UIToolbar!
 
 
@@ -29,7 +36,7 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 		let textField = [topTextField,bottomTextField]
 		func textFieldsSetup(textFields: [UITextField?])
 		{
-			// let defaultString : String = "GET CREATIVE"
+			 //let defaultString : String = "GET CREATIVE"
 			
 			let memeTextAttributes:[String:Any] = [
 				//Outline Colour
@@ -41,20 +48,44 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 				] as [String : Any]
 			for textField in textFields
 			{
+				topTextField.text = "GET"
+				bottomTextField.text = "CREATIVE"
 				textField?.defaultTextAttributes = memeTextAttributes
 				textField?.textAlignment = .center
-				//			textField?.delegate = self
+				textField?.delegate = self
+			
 			}
 		}
 	}
 	
-	func cameraCheck()
-	{
-		cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+	
+	func pickAnImageFromSource(source: UIImagePickerControllerSourceType) {
+		let pickerImage = UIImagePickerController()
+		pickerImage.delegate = self
+		pickerImage.sourceType = source
+		present(pickerImage, animated: true, completion: nil)
+	}
+	
+	
+	@IBAction func photoAlbumAction(_ sender: Any) {
+		pickAnImageFromSource(source: .photoLibrary)
+	}
+	
+	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+		imagePickerView.image = info[UIImagePickerControllerOriginalImage] as? UIImage; dismiss(animated: true, completion: nil)
+	}
+	
+	func imagePickerControllerDidCancel(_: UIImagePickerController) {
+		dismiss(animated: true, completion: nil)
+	}
+	@IBAction func cameraButtonAction(_ sender: Any) {
+		if cameraButton.isEnabled == UIImagePickerController.isSourceTypeAvailable(.camera) {
+			pickAnImageFromSource(source: .camera)
+		}
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
-		
+		cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
 		super.viewWillAppear(animated)
 		subscribeToKeyboardNotifications()
 	}
@@ -88,26 +119,27 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 		NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
 	}
 	
-	func pickAnImageFromSource(source: UIImagePickerControllerSourceType) {
-		let pickerImage = UIImagePickerController()
-		pickerImage.delegate = self
-		pickerImage.sourceType = source
-		present(pickerImage, animated: true, completion: nil)
+	func generateMemedImage() -> UIImage {
+		
+		
+		// Render View To An Image
+		UIGraphicsBeginImageContext(self.view.frame.size)
+		view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
+		let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+		UIGraphicsEndImageContext()
+		
+		
+		return memedImage
 	}
 	
-	@IBAction func cameraButtonAction(_ sender: Any) {
-		pickAnImageFromSource(source: .camera)
+
+	func save() {
+		// Create The Meme
+		let memedImage = generateMemedImage()
+		_ = Meme(top: topTextField.text!, bottom: bottomTextField.text!, image: imagePickerView.image, memedImage:memedImage)
+		
 	}
-	@IBAction func photoAlbumAction(_ sender: Any) {
-		pickAnImageFromSource(source: .photoLibrary)
-	}
-	
-	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-		imagePickerView.image = info[UIImagePickerControllerOriginalImage] as? UIImage; dismiss(animated: true, completion: nil)
-	}
-	
-	func imagePickerControllerDidCancel(_: UIImagePickerController) {
-		dismiss(animated: true, completion: nil)
-	}
+
+
 	
 }

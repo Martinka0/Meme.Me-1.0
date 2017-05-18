@@ -301,6 +301,7 @@
 				67EF35141EC4B4860048A867 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
