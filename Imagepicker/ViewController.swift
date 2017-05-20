@@ -37,8 +37,8 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 		
 		func textFieldsSetup(textField: UITextField) {
 		textField.defaultTextAttributes = memeTextAttributes
-		topTextField.text = "GET"
-		bottomTextField.text = "CREATIVE"
+		topTextField.text = "TOP"
+		bottomTextField.text = "BOTTOM"
 		textField.textAlignment = .center
 		textField.delegate = self
 		}
@@ -132,6 +132,7 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 		
 		let memedImage = generateMemedImage()
 		_ = Meme(top: topTextField.text!, bottom: bottomTextField.text!, image: imagePickerView.image, memedImage:memedImage)
+		
 		
 	}
 
