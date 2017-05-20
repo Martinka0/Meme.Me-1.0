@@ -7,16 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		676D95ED1ECFDE810042D58E /* impact in Resources */ = {isa = PBXBuildFile; fileRef = 676D95EC1ECFDE810042D58E /* impact */; };
+		676D95ED1ECFDE810042D58E /* Ressources in Resources */ = {isa = PBXBuildFile; fileRef = 676D95EC1ECFDE810042D58E /* Ressources */; };
 		67EF35041EC4B4860048A867 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67EF35031EC4B4860048A867 /* AppDelegate.swift */; };
 		67EF35061EC4B4860048A867 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67EF35051EC4B4860048A867 /* ViewController.swift */; };
 		67EF35091EC4B4860048A867 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67EF35071EC4B4860048A867 /* Main.storyboard */; };
 		67EF350B1EC4B4860048A867 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67EF350A1EC4B4860048A867 /* Assets.xcassets */; };
 		67EF350E1EC4B4860048A867 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67EF350C1EC4B4860048A867 /* LaunchScreen.storyboard */; };
+		67FF753A1ED0FD8D00673624 /* impact.png in Resources */ = {isa = PBXBuildFile; fileRef = 67FF75351ED0FD8D00673624 /* impact.png */; };
+		67FF753B1ED0FD8D00673624 /* impact.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 67FF75361ED0FD8D00673624 /* impact.ttf */; };
+		67FF753C1ED0FD8D00673624 /* Impacted.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 67FF75371ED0FD8D00673624 /* Impacted.ttf */; };
+		67FF753D1ED0FD8D00673624 /* myfontsfree.txt in Resources */ = {isa = PBXBuildFile; fileRef = 67FF75381ED0FD8D00673624 /* myfontsfree.txt */; };
+		67FF753E1ED0FD8D00673624 /* unicode.impact.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 67FF75391ED0FD8D00673624 /* unicode.impact.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		676D95EC1ECFDE810042D58E /* impact */ = {isa = PBXFileReference; lastKnownFileType = folder; path = impact; sourceTree = "<group>"; };
+		676D95EC1ECFDE810042D58E /* Ressources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Ressources; sourceTree = "<group>"; };
 		67EF35001EC4B4860048A867 /* Imagepicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Imagepicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67EF35031EC4B4860048A867 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		67EF35051EC4B4860048A867 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,6 +29,11 @@
 		67EF350A1EC4B4860048A867 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		67EF350D1EC4B4860048A867 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		67EF350F1EC4B4860048A867 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		67FF75351ED0FD8D00673624 /* impact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = impact.png; path = MemeMe_assets/impact/impact.png; sourceTree = "<group>"; };
+		67FF75361ED0FD8D00673624 /* impact.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = impact.ttf; path = MemeMe_assets/impact/impact.ttf; sourceTree = "<group>"; };
+		67FF75371ED0FD8D00673624 /* Impacted.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Impacted.ttf; path = MemeMe_assets/impact/Impacted.ttf; sourceTree = "<group>"; };
+		67FF75381ED0FD8D00673624 /* myfontsfree.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = myfontsfree.txt; path = MemeMe_assets/impact/myfontsfree.txt; sourceTree = "<group>"; };
+		67FF75391ED0FD8D00673624 /* unicode.impact.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = unicode.impact.ttf; path = MemeMe_assets/impact/unicode.impact.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +50,11 @@
 		67EF34F71EC4B4860048A867 = {
 			isa = PBXGroup;
 			children = (
+				67FF75351ED0FD8D00673624 /* impact.png */,
+				67FF75361ED0FD8D00673624 /* impact.ttf */,
+				67FF75371ED0FD8D00673624 /* Impacted.ttf */,
+				67FF75381ED0FD8D00673624 /* myfontsfree.txt */,
+				67FF75391ED0FD8D00673624 /* unicode.impact.ttf */,
 				67EF35021EC4B4860048A867 /* Imagepicker */,
 				67EF35011EC4B4860048A867 /* Products */,
 			);
@@ -56,7 +71,7 @@
 		67EF35021EC4B4860048A867 /* Imagepicker */ = {
 			isa = PBXGroup;
 			children = (
-				676D95EC1ECFDE810042D58E /* impact */,
+				676D95EC1ECFDE810042D58E /* Ressources */,
 				67EF35031EC4B4860048A867 /* AppDelegate.swift */,
 				67EF35051EC4B4860048A867 /* ViewController.swift */,
 				67EF35071EC4B4860048A867 /* Main.storyboard */,
@@ -126,7 +141,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				676D95ED1ECFDE810042D58E /* impact in Resources */,
+				67FF753A1ED0FD8D00673624 /* impact.png in Resources */,
+				67FF753B1ED0FD8D00673624 /* impact.ttf in Resources */,
+				67FF753C1ED0FD8D00673624 /* Impacted.ttf in Resources */,
+				67FF753D1ED0FD8D00673624 /* myfontsfree.txt in Resources */,
+				67FF753E1ED0FD8D00673624 /* unicode.impact.ttf in Resources */,
+				676D95ED1ECFDE810042D58E /* Ressources in Resources */,
 				67EF350E1EC4B4860048A867 /* LaunchScreen.storyboard in Resources */,
 				67EF350B1EC4B4860048A867 /* Assets.xcassets in Resources */,
 				67EF35091EC4B4860048A867 /* Main.storyboard in Resources */,

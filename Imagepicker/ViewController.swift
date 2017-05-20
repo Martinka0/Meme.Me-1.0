@@ -30,10 +30,16 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 	@IBOutlet weak var albumButton: UIBarButtonItem!
 	@IBOutlet weak var pickToolbar: UIToolbar!
 
-
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-	
+		let fontFamilyNames = UIFont.familyNames
+		for familyName in fontFamilyNames {
+			print("------------------------------")
+			print("Font Family Name = [\(familyName)]")
+			let names = UIFont.fontNames(forFamilyName: familyName)
+			print("Font Names = [\(names)]")
+		}
 		
 		func textFieldsSetup(textField: UITextField) {
 		textField.defaultTextAttributes = memeTextAttributes
@@ -46,6 +52,7 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 		textFieldsSetup(textField: bottomTextField)
 
 	}
+	
 	
 	let memeTextAttributes:[String:Any] = [
 		//Outline Colour
@@ -154,5 +161,8 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 		bottomTextField.text = "CREATIVE"
 		self.imagePickerView.image = nil
 	}
+
 	
 }
+
+

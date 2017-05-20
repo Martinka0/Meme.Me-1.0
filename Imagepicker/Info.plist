@@ -6,7 +6,9 @@
 	<string></string>
 	<key>UIAppFonts</key>
 	<array>
-		<string></string>
+		<string>unicode.impact.ttf</string>
+		<string>imapct.ttf</string>
+		<string>Impacted.ttf</string>
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>test2</string>
