@@ -16,6 +16,7 @@ struct Meme {
 	var memedImage: UIImage?
 }
 
+
 class ViewController: UIViewController, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate,UITextFieldDelegate {
 	
@@ -53,7 +54,7 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 		NSStrokeColorAttributeName: UIColor.black,
 		//Text Colour
 		NSForegroundColorAttributeName : UIColor.white,
-		NSFontAttributeName : UIFont(name: "Impact", size: 23)!,
+		NSFontAttributeName : UIFont(name: "Impact", size: 35)!,
 		NSStrokeWidthAttributeName : -4.0
 		] as [String : Any]
 	
