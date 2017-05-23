@@ -30,16 +30,10 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 	@IBOutlet weak var albumButton: UIBarButtonItem!
 	@IBOutlet weak var pickToolbar: UIToolbar!
 
-	
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		let fontFamilyNames = UIFont.familyNames
-		for familyName in fontFamilyNames {
-			print("------------------------------")
-			print("Font Family Name = [\(familyName)]")
-			let names = UIFont.fontNames(forFamilyName: familyName)
-			print("Font Names = [\(names)]")
-		}
+	
 		
 		func textFieldsSetup(textField: UITextField) {
 		textField.defaultTextAttributes = memeTextAttributes
@@ -59,9 +53,11 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 		NSStrokeColorAttributeName: UIColor.black,
 		//Text Colour
 		NSForegroundColorAttributeName : UIColor.white,
-		NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 25)!,
+		NSFontAttributeName : UIFont(name: "Impact", size: 23)!,
 		NSStrokeWidthAttributeName : -4.0
 		] as [String : Any]
+	
+
 	
 	func pickAnImageFromSource(source: UIImagePickerControllerSourceType) {
 		let pickerImage = UIImagePickerController()
@@ -124,12 +120,17 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 	}
 	
 	func generateMemedImage() -> UIImage {
+		
+		navigationBar.isHidden = true
+		pickToolbar.isHidden = true
 	
 		UIGraphicsBeginImageContext(self.view.frame.size)
 		view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
 		let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
 		UIGraphicsEndImageContext()
 		
+		navigationBar.isHidden = false
+		pickToolbar.isHidden = false
 		
 		return memedImage
 	}

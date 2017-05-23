@@ -61,20 +61,20 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <stackView opaque="NO" contentMode="scaleAspectFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="9xV-xx-OXu">
-                                <rect key="frame" x="16" y="64" width="288" height="372"/>
+                            <stackView opaque="NO" contentMode="scaleAspectFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9xV-xx-OXu">
+                                <rect key="frame" x="16" y="72" width="288" height="356"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="35" translatesAutoresizingMaskIntoConstraints="NO" id="Txa-DT-PY0">
-                                        <rect key="frame" x="0.0" y="0.0" width="288" height="17"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="288" height="1"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="tYR-VJ-ezP">
-                                        <rect key="frame" x="0.0" y="37" width="288" height="298"/>
+                                        <rect key="frame" x="0.0" y="21" width="288" height="298"/>
                                     </imageView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" textAlignment="natural" clearsOnBeginEditing="YES" adjustsFontSizeToFit="NO" minimumFontSize="35" translatesAutoresizingMaskIntoConstraints="NO" id="dLN-hm-aUN">
-                                        <rect key="frame" x="0.0" y="355" width="288" height="17"/>
+                                        <rect key="frame" x="0.0" y="339" width="288" height="17"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
@@ -88,15 +88,15 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="9xV-xx-OXu" firstAttribute="centerX" secondItem="Paf-6p-Pkm" secondAttribute="centerX" id="7xd-IY-AUw"/>
-                            <constraint firstItem="kL4-ca-67n" firstAttribute="top" secondItem="9xV-xx-OXu" secondAttribute="bottom" id="90t-59-ud6"/>
                             <constraint firstItem="Paf-6p-Pkm" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" symbolic="YES" id="Hkx-7e-t70"/>
                             <constraint firstItem="9xV-xx-OXu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="JFd-Ht-EjG"/>
                             <constraint firstItem="kL4-ca-67n" firstAttribute="leading" secondItem="Paf-6p-Pkm" secondAttribute="leading" id="Nkb-9Y-aQM"/>
-                            <constraint firstItem="9xV-xx-OXu" firstAttribute="top" secondItem="Paf-6p-Pkm" secondAttribute="bottom" id="Oir-jx-rUE"/>
                             <constraint firstItem="kL4-ca-67n" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Q3C-Qm-wad"/>
                             <constraint firstItem="9xV-xx-OXu" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="RjR-2m-fNG"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="kL4-ca-67n" secondAttribute="bottom" symbolic="YES" id="SrU-bN-Kal"/>
                             <constraint firstItem="kL4-ca-67n" firstAttribute="trailing" secondItem="Paf-6p-Pkm" secondAttribute="trailing" id="lNC-du-97R"/>
+                            <constraint firstItem="9xV-xx-OXu" firstAttribute="top" secondItem="Paf-6p-Pkm" secondAttribute="bottom" constant="8" id="mMW-eB-pxq"/>
+                            <constraint firstItem="kL4-ca-67n" firstAttribute="top" secondItem="9xV-xx-OXu" secondAttribute="bottom" constant="8" id="pbl-G9-bh9"/>
                         </constraints>
                     </view>
                     <connections>
