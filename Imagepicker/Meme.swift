@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 struct Meme {
 	var top: String = ""
 	var bottom: String = ""

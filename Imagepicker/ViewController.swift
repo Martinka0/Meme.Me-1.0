@@ -7,26 +7,18 @@
 //
 import UIKit
 
-var memes = [Meme]()
-
-struct Meme {
-	var top: String = ""
-	var bottom: String = ""
-	var image: UIImage?
-	var memedImage: UIImage?
-}
 
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate,
+
+class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate,
 UINavigationControllerDelegate,UITextFieldDelegate {
 	
 	@IBOutlet weak var navigationBar: UINavigationBar!
-	
 	@IBOutlet weak var CancelButton: UIBarButtonItem!
 	@IBOutlet weak var shareButton: UIBarButtonItem!
 	@IBOutlet weak var imagePickerView: UIImageView!
-	@IBOutlet weak var topTextField: UITextField!
-	@IBOutlet weak var bottomTextField: UITextField!
+	@IBOutlet var topTextField: UITextField!
+	@IBOutlet var bottomTextField: UITextField!
 	@IBOutlet weak var cameraButton: UIBarButtonItem!
 	@IBOutlet weak var albumButton: UIBarButtonItem!
 	@IBOutlet weak var pickToolbar: UIToolbar!
@@ -40,6 +32,7 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 		textField.defaultTextAttributes = memeTextAttributes
 		topTextField.text = "TOP"
 		bottomTextField.text = "BOTTOM"
+			
 		textField.textAlignment = .center
 		textField.delegate = self
 		}
@@ -88,7 +81,7 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 	override func viewWillAppear(_ animated: Bool) {
 		cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
 		super.viewWillAppear(animated)
-		subscribeToKeyboardNotifications()
+		unsubscribeFromKeyboardNotifications()
 	}
 	
 	
@@ -98,22 +91,36 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 		unsubscribeFromKeyboardNotifications()
 	}
 	
-	func keyboardWillShow(_ notification:Notification) {
-		
-		view.frame.origin.y = 0 - getKeyboardHeight(notification)
+	
+	func keyboardWillShow(_ notification: NSNotification) {
+		if bottomTextField.isFirstResponder {
+			view.frame.origin.y = -keyboardSize(notification: notification)
+		} else {
+			resetFrame()
+		}
 	}
 	
-	func getKeyboardHeight(_ notification:Notification) -> CGFloat {
-		
-		let userInfo = notification.userInfo
-		let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
-		return keyboardSize.cgRectValue.height
+	func keyboardWillHide(info: NSNotification) {
+		resetFrame()
 	}
 	
-	func subscribeToKeyboardNotifications() {
-		
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
+	private
+	
+	func resetFrame() {
+		view.frame.origin.y = 0
 	}
+	
+	func keyboardSize(notification: NSNotification) -> CGFloat {
+		if let rect = notification.userInfo![UIKeyboardFrameBeginUserInfoKey] as? NSValue {
+			return rect.cgRectValue.height
+		} else {
+			return CGFloat(0)
+		}
+	}
+	
+
+
+
 	
 	func unsubscribeFromKeyboardNotifications() {
 		
@@ -136,15 +143,17 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 		return memedImage
 	}
 	
-
 	func save() {
+		// Create the meme
+		let meme = Meme(top: topTextField.text!, bottom: bottomTextField.text!, image: imagePickerView.image, memedImage: memedImage)
 		
-		let memedImage = generateMemedImage()
-		_ = Meme(top: topTextField.text!, bottom: bottomTextField.text!, image: imagePickerView.image, memedImage:memedImage)
-		
-		
+		// Add it to the memes array in the Application Delegate
+		let object = UIApplication.shared.delegate
+		let appDelegate = object as! AppDelegate
+		appDelegate.memes.append(meme)
 	}
-
+	
+	
 	@IBAction func shareButtonAction(_ sender: Any) {
 		let memedImage = generateMemedImage()
 		let activityController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
