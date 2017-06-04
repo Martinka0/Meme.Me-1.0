@@ -104,6 +104,7 @@
                         <outlet property="albumButton" destination="e5d-TC-Abr" id="sKg-tZ-Ypd"/>
                         <outlet property="bottomTextField" destination="dLN-hm-aUN" id="81c-ec-R95"/>
                         <outlet property="cameraButton" destination="fKj-zg-ady" id="2ak-ju-fGl"/>
+                        <outlet property="heightConstraint" destination="aM1-EY-G8Z" id="n02-ON-SDe"/>
                         <outlet property="imagePickerView" destination="tYR-VJ-ezP" id="GFZ-s8-ecJ"/>
                         <outlet property="navigationBar" destination="Paf-6p-Pkm" id="fGB-ra-t6A"/>
                         <outlet property="pickToolbar" destination="kL4-ca-67n" id="JD2-wF-UpL"/>

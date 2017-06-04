@@ -29,6 +29,7 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 	@IBOutlet weak var cameraButton: UIBarButtonItem!
 	@IBOutlet weak var albumButton: UIBarButtonItem!
 	@IBOutlet weak var pickToolbar: UIToolbar!
+	@IBOutlet weak var heightConstraint: NSLayoutConstraint!
 
 
 	override func viewDidLoad() {
@@ -98,9 +99,20 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 	}
 	
 	func keyboardWillShow(_ notification:Notification) {
-		
+		if bottomTextField.isFirstResponder {
 		view.frame.origin.y = 0 - getKeyboardHeight(notification)
+		}
+		
 	}
+	
+	func keyboardWillHide(_ notification:Notification) {
+		if bottomTextField.isFirstResponder {
+			view.frame.origin.y += 0 - getKeyboardHeight(notification)
+		}
+	}
+
+
+
 	
 	func getKeyboardHeight(_ notification:Notification) -> CGFloat {
 		
