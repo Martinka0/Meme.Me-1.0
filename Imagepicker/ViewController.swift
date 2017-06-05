@@ -29,8 +29,6 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 	@IBOutlet weak var cameraButton: UIBarButtonItem!
 	@IBOutlet weak var albumButton: UIBarButtonItem!
 	@IBOutlet weak var pickToolbar: UIToolbar!
-	@IBOutlet weak var heightConstraint: NSLayoutConstraint!
-
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -100,17 +98,16 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 	
 	func keyboardWillShow(_ notification:Notification) {
 		if bottomTextField.isFirstResponder {
-		view.frame.origin.y = 0 - getKeyboardHeight(notification)
+		view.frame.origin.y = getKeyboardHeight(notification) * (-1)
 		}
 		
 	}
 	
 	func keyboardWillHide(_ notification:Notification) {
 		if bottomTextField.isFirstResponder {
-			view.frame.origin.y += 0 - getKeyboardHeight(notification)
+			view.frame.origin.y = 0
 		}
 	}
-
 
 
 	
@@ -120,11 +117,13 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 		let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
 		return keyboardSize.cgRectValue.height
 	}
-	
+
 	func subscribeToKeyboardNotifications() {
 		
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
 	}
+
 	
 	func unsubscribeFromKeyboardNotifications() {
 		
