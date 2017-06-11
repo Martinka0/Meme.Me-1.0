@@ -16,8 +16,7 @@ struct Meme {
 	var memedImage: UIImage?
 }
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate,
-UINavigationControllerDelegate,UITextFieldDelegate {
+class ViewController: UIViewController {
 	
 	@IBOutlet weak var navigationBar: UINavigationBar!
 	
@@ -29,7 +28,17 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 	@IBOutlet weak var cameraButton: UIBarButtonItem!
 	@IBOutlet weak var albumButton: UIBarButtonItem!
 	@IBOutlet weak var pickToolbar: UIToolbar!
-
+	
+	let memeTextAttributes:[String:Any] = [
+		//Outline Colour
+		NSStrokeColorAttributeName: UIColor.black,
+		//Text Colour
+		NSForegroundColorAttributeName : UIColor.white,
+		NSFontAttributeName : UIFont(name: "Impact", size: 23)!,
+		NSStrokeWidthAttributeName : -4.0
+		] as [String : Any]
+	
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 	
@@ -46,43 +55,6 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 
 	}
 	
-	
-	let memeTextAttributes:[String:Any] = [
-		//Outline Colour
-		NSStrokeColorAttributeName: UIColor.black,
-		//Text Colour
-		NSForegroundColorAttributeName : UIColor.white,
-		NSFontAttributeName : UIFont(name: "Impact", size: 23)!,
-		NSStrokeWidthAttributeName : -4.0
-		] as [String : Any]
-	
-
-	
-	func pickAnImageFromSource(source: UIImagePickerControllerSourceType) {
-		let pickerImage = UIImagePickerController()
-		pickerImage.delegate = self
-		pickerImage.sourceType = source
-		present(pickerImage, animated: true, completion: nil)
-	}
-	
-	
-	@IBAction func photoAlbumAction(_ sender: Any) {
-		pickAnImageFromSource(source: .photoLibrary)
-	}
-	
-	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-		imagePickerView.image = info[UIImagePickerControllerOriginalImage] as? UIImage; dismiss(animated: true, completion: nil)
-	}
-	
-	func imagePickerControllerDidCancel(_: UIImagePickerController) {
-		dismiss(animated: true, completion: nil)
-	}
-	@IBAction func cameraButtonAction(_ sender: Any) {
-		if cameraButton.isEnabled == UIImagePickerController.isSourceTypeAvailable(.camera) {
-			pickAnImageFromSource(source: .camera)
-		}
-	}
-	
 	override func viewWillAppear(_ animated: Bool) {
 		cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
 		super.viewWillAppear(animated)
@@ -96,17 +68,19 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 		unsubscribeFromKeyboardNotifications()
 	}
 	
+// Methods for keyboards and view shifting when editing the bottom text field
+	
 	func keyboardWillShow(_ notification:Notification) {
-		if bottomTextField.isFirstResponder {
-		view.frame.origin.y = getKeyboardHeight(notification) * (-1)
-		}
+	
+		view.frame.origin.y -= getKeyboardHeight(notification)
+		
 		
 	}
 	
 	func keyboardWillHide(_ notification:Notification) {
-		if bottomTextField.isFirstResponder {
-			view.frame.origin.y = 0
-		}
+		
+		view.frame.origin.y += getKeyboardHeight(notification)
+		
 	}
 
 
@@ -128,8 +102,15 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 	func unsubscribeFromKeyboardNotifications() {
 		
 		NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+	
+		// MARK: TODO: unsubscribe from keyboard will hide
+		
+		NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
 	}
 	
+// End of methods for keyboards and view shifting when editing the bottom text field
+	
+
 	func generateMemedImage() -> UIImage {
 		
 		navigationBar.isHidden = true
@@ -146,7 +127,8 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 		return memedImage
 	}
 	
-
+// Methods for sharing Memed image
+	
 	func save() {
 		
 		let memedImage = generateMemedImage()
@@ -167,6 +149,8 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 		
 	}
 	
+// End of methods for sharing Memed image
+	
 	@IBAction func cancelAction(_ sender: Any) {
 	
 		topTextField.text = "GET"
@@ -174,7 +158,64 @@ UINavigationControllerDelegate,UITextFieldDelegate {
 		self.imagePickerView.image = nil
 	}
 
+
 	
 }
 
 
+extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+	
+	// Methods for ImagePickerController Delegate
+	
+	func pickAnImageFromSource(source: UIImagePickerControllerSourceType) {
+		let pickerImage = UIImagePickerController()
+		pickerImage.delegate = self
+		pickerImage.sourceType = source
+		present(pickerImage, animated: true, completion: nil)
+	}
+	
+	
+	@IBAction func photoAlbumAction(_ sender: Any) {
+		pickAnImageFromSource(source: .photoLibrary)
+	}
+	
+	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+		imagePickerView.image = info[UIImagePickerControllerOriginalImage] as? UIImage; dismiss(animated: true, completion: nil)
+	}
+	
+	func imagePickerControllerDidCancel(_: UIImagePickerController) {
+		dismiss(animated: true, completion: nil)
+	}
+	
+	@IBAction func cameraButtonAction(_ sender: Any) {
+		if cameraButton.isEnabled == UIImagePickerController.isSourceTypeAvailable(.camera) {
+			pickAnImageFromSource(source: .camera)
+		}
+	}
+	
+	// End of Methods for ImagePickerController Delegate
+
+}
+
+extension ViewController:  UITextFieldDelegate {
+	
+	
+	func textFieldDidBeginEditing(_ textField: UITextField) {
+		if textField.tag == 1 {
+		unsubscribeFromKeyboardNotifications()
+		}
+		// MARK: TODO: unsubriscribe from Notifications if editing the top text field (textField.tag == 1)
+	}
+	
+	func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+		if textField.tag == 1 {
+			 subscribeToKeyboardNotifications()
+		}
+		// MARK: TODO: subcribe to Notifications after editing the top text field (textField.tag == 1)
+	}
+	
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		textField.resignFirstResponder()
+		return true
+	}
+}
