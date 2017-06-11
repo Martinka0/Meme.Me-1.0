@@ -34,7 +34,7 @@ class ViewController: UIViewController {
 		NSStrokeColorAttributeName: UIColor.black,
 		//Text Colour
 		NSForegroundColorAttributeName : UIColor.white,
-		NSFontAttributeName : UIFont(name: "Impact", size: 23)!,
+		NSFontAttributeName : UIFont(name: "Impact", size: 30)!,
 		NSStrokeWidthAttributeName : -4.0
 		] as [String : Any]
 	
@@ -103,7 +103,7 @@ class ViewController: UIViewController {
 		
 		NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
 	
-		// MARK: TODO: unsubscribe from keyboard will hide
+		//  unsubscribe from keyboard will hide
 		
 		NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
 	}
@@ -204,14 +204,14 @@ extension ViewController:  UITextFieldDelegate {
 		if textField.tag == 1 {
 		unsubscribeFromKeyboardNotifications()
 		}
-		// MARK: TODO: unsubriscribe from Notifications if editing the top text field (textField.tag == 1)
+		//  unsubriscribe from Notifications if editing the top text field (textField.tag == 1)
 	}
 	
 	func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
 		if textField.tag == 1 {
 			 subscribeToKeyboardNotifications()
 		}
-		// MARK: TODO: subcribe to Notifications after editing the top text field (textField.tag == 1)
+		//  subcribe to Notifications after editing the top text field (textField.tag == 1)
 	}
 	
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
